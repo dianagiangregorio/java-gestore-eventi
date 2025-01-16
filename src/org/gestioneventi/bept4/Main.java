@@ -54,11 +54,21 @@ public class Main {
             System.out.println("Errore, evento non creato.");
         }
 
+        //effettuare prenotazioni
         // controllo che l'evento sia stato creato correttamente
         if (evento != null) {
-            //effettuo le prenotazioni
-            System.out.println("Vuoi fare delle prenotazioni? (Y/N)");
-            String effettuoPrenotazione = input.nextLine().toUpperCase();
+            String effettuoPrenotazione = "";
+            while (!effettuoPrenotazione.equals("Y") && !effettuoPrenotazione.equals("N")) {
+
+                //chiedo all'utente se vuole effettuare delle prenotazioni
+                System.out.println("Vuoi fare delle prenotazioni? (Y/N)");
+                effettuoPrenotazione = input.nextLine().toUpperCase();
+
+                //verifico la risposta
+                if (!effettuoPrenotazione.equals("Y") && !effettuoPrenotazione.equals("N")) {
+                    System.out.println("Risposta non valida. Rispondi con Y(yes) oppre N(no)");
+                }
+            }
 
             // se la risposta è Y(Yes) allora chiedo quante prenotazioni effettuare
             if (effettuoPrenotazione.equals("Y")) {
@@ -82,25 +92,83 @@ public class Main {
                             continue;
                         }
 
-                        //se tutto è corretto effettuo le prenotazioni
-                        for(int i = 0; i < numeroPrenotazioni; i++ ){
+                        // se tutto è corretto effettuo le prenotazioni
+                        for (int i = 0; i < numeroPrenotazioni; i++) {
                             evento.prenota();
                         }
 
                         System.out.println("Prenotazioni effettuate.");
-                        //Stampare a video il numero di posti prenotati e quelli disponibili
+                        // Stampare a video il numero di posti prenotati e quelli disponibili
                         System.out.println("Posti prenotati: " + evento.getPostiPrenotati());
-                        System.out.println("Posti disponibili: " + (evento.getPostiTotali() - evento.getPostiPrenotati()));
+                        System.out.println(
+                                "Posti disponibili: " + (evento.getPostiTotali() - evento.getPostiPrenotati()));
                         break;
-                    
+
                     } catch (NumberFormatException e) {
                         System.out.println("Inserisci un numero corretto.");
                     }
                 }
-        }else {
-            System.out.println("Nessuna prenotazione effettuata.");
+            } else {
+                System.out.println("Nessuna prenotazione effettuata.");
+            }
+
+            // disdire le prenotazioni
+            String disdiciPrenotazioni = "";
+            while (!disdiciPrenotazioni.equals("Y") && !disdiciPrenotazioni.equals("N")) {
+
+                //chiedo all'utente se vuole effettuare delle prenotazioni
+                System.out.println("Vuoi disdire delle prenotazioni? (Y/N)");
+                disdiciPrenotazioni = input.nextLine().toUpperCase();
+
+                //verifico la risposta
+                if (!disdiciPrenotazioni.equals("Y") && !disdiciPrenotazioni.equals("N")) {
+                    System.out.println("Risposta non valida. Rispondi con Y(yes) oppre N(no)");
+                }
+            }
+
+            // se la risposta è Y(Yes) allora chiedo quanti posti vuole disdire
+            if (disdiciPrenotazioni.equals("Y")) {
+                int disdettePrenotazioni = 0;
+
+                while (true) {
+                    System.out.println("Quante prenotazioni vuoi disdire?");
+
+                    try {
+                        disdettePrenotazioni = Integer.parseInt(input.nextLine());
+
+                        // finchè l'utente non inserisce un numero valido non vado avanti nel codice
+                        if (disdettePrenotazioni <= 0) {
+                            System.out.println("Inserisci un numero maggiore di 0.");
+                            continue;
+                        }
+
+                        // controllo che ci siano posti da disdire per l'evento
+                        if (disdettePrenotazioni > evento.getPostiPrenotati()) {
+                            System.out.println("Non ci sono prenotazioni da disdire.");
+                            continue;
+                        }
+
+                        // se tutto è corretto effettuo la disdetta delle prenotazioni
+                        for (int i = 0; i < disdettePrenotazioni; i++) {
+                            evento.disdici();
+                        }
+
+                        System.out.println("Prenotazioni disdette.");
+                        // Stampare a video il numero di posti prenotati e quelli disponibili
+                        System.out.println("Posti prenotati: " + evento.getPostiPrenotati());
+                        System.out.println(
+                                "Posti disponibili: " + (evento.getPostiTotali() - evento.getPostiPrenotati()));
+                        break;
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Inserisci un numero corretto.");
+                    }
+                }
+            } else {
+                System.out.println("Nessuna prenotazione disdetta.");
+            }
+
         }
-        
-        }input.close();
+        input.close();
     }
 }

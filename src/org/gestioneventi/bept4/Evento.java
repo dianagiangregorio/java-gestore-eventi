@@ -80,7 +80,6 @@ public class Evento {
         }
         else{
             postiPrenotati --;
-            System.out.println("La tua prenotazione è stata disdetta.");
         }
     }
 
