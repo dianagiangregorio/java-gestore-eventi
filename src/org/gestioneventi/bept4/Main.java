@@ -88,6 +88,9 @@ public class Main {
                         }
 
                         System.out.println("Prenotazioni effettuate.");
+                        //Stampare a video il numero di posti prenotati e quelli disponibili
+                        System.out.println("Posti prenotati: " + evento.getPostiPrenotati());
+                        System.out.println("Posti disponibili: " + (evento.getPostiTotali() - evento.getPostiPrenotati()));
                         break;
                     
                     } catch (NumberFormatException e) {

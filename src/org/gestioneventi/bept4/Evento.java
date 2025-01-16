@@ -68,7 +68,6 @@ public class Evento {
         }
         else{
             postiPrenotati ++;
-            System.out.println("Prenotazione effeutata.");
         }
     }
 
