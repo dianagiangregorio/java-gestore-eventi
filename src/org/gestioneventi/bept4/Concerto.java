@@ -40,11 +40,11 @@ public class Concerto extends Evento {
     }
 
     public String prezzoFormattato(){
-        return String.format("%.2f€", prezzo); //converto in stringa un numero decimale e scrivo il valore con 2 cifre decimali
+        return String.format("%.2f€", prezzo); //converto in stringa un numero decimale e scrivo il valore con 2 cifre decimali (x simbolo € \u20AC)
         }
 
     @Override
     public String toString(){
-        return dataFormattata() + " " + oraFormattata() + " - " + getTitolo() + " - " + prezzoFormattato()
+        return dataFormattata() + " " + oraFormattata() + " - " + getTitolo() + " - " + prezzoFormattato();
     }
 }
