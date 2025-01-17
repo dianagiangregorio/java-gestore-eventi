@@ -50,12 +50,6 @@ public class Evento {
 
     public void setData(LocalDate data){
         this.data = data;
-        // if (data.isAfter(LocalDate.now())) {
-        //     this.data = data;            
-        // }
-        // else {
-        //     System.out.println("La data inserita non è corretta.");
-        // }
     }
 
     //metodo per prenotare un post ad un evento

@@ -18,13 +18,9 @@ public class Main {
             titolo = input.nextLine();
         }
 
-        // chiedo all'utente di inserire la data, lo scanner restituirà una variabile di
-        // tipo Stringa
-        // utilizzo un ciclo while per permettere all'utente di riprovare ad inserire la
-        // data finchè non è corretta
-        // controllo che il formato della data inserito sia corretto e lo inserisco
-        // nella variabile LocalDate data
-
+        // chiedo all'utente di inserire la data, lo scanner restituirà una variabile di tipo Stringa
+        // utilizzo un ciclo while per permettere all'utente di riprovare ad inserire la data finchè non è corretta
+        // controllo che il formato della data inserito sia corretto e lo inserisco nella variabile LocalDate data
         LocalDate data = null;
         while (data == null) {
             System.out.println("Inserisci la data dell'evento in formato dd/MM/yyyy: ");
