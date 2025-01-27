@@ -18,7 +18,7 @@ public class Evento {
         }
         //controllo che il numero di posti totali sia un numero positivo
         if (postiTotali <= 0) {
-            throw new IllegalArgumentException("Il numero di posti totali non può essere meno di 0");
+            throw new IllegalArgumentException("Il numero di posti totali deve essere maggiore di 0");
         }
         this.titolo = titolo;
         this.data = data;

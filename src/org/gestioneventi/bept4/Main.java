@@ -47,7 +47,7 @@ public class Main {
             System.out.println("Hai creato l'evento:");
             System.out.println(evento);
         } catch (IllegalArgumentException e) {
-            System.out.println("Errore, evento non creato.");
+            System.out.println("Errore, evento non creato. " + e.getMessage());
         }
 
         //effettuare prenotazioni
@@ -141,7 +141,7 @@ public class Main {
                         // controllo che ci siano posti da disdire per l'evento
                         if (disdettePrenotazioni > evento.getPostiPrenotati()) {
                             System.out.println("Non ci sono prenotazioni da disdire.");
-                            continue;
+                            break;
                         }
 
                         // se tutto è corretto effettuo la disdetta delle prenotazioni
