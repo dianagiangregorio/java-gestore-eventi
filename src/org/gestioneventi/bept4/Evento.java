@@ -12,16 +12,14 @@ public class Evento {
     //costrutttore
     public Evento(String titolo, LocalDate data, int postiTotali){
 
-        //controllo che la data inserita non sia già passata
-        if (data.isBefore(LocalDate.now())){
-            throw new IllegalArgumentException("Hai inserito una data non valida");
-        }
+        setTitolo(titolo);
+        setData(data);
+
         //controllo che il numero di posti totali sia un numero positivo
         if (postiTotali <= 0) {
             throw new IllegalArgumentException("Il numero di posti totali deve essere maggiore di 0");
         }
-        this.titolo = titolo;
-        this.data = data;
+
         this.postiTotali = postiTotali;
         this.postiPrenotati = 0; //il numero di posti prenotati viene inizializzato a 0
     }
@@ -49,15 +47,17 @@ public class Evento {
     }
 
     public void setData(LocalDate data){
-        this.data = data;
+        
+        //controllo che la data inserita non sia già passata
+        if (data.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("L'evento è già passato.");
+        }
+            this.data = data;
     }
 
-    //metodo per prenotare un post ad un evento
+    //metodo per prenotare posti ad un evento
     public void prenota(){
-        if (data.isBefore(LocalDate.now())) {
-            System.out.println("L'evento è già passato.");
-        }
-        else if (postiPrenotati >= postiTotali) {
+        if (postiPrenotati >= postiTotali) {
             System.out.println("Non ci sono posti disponibili.");
         }
         else{
@@ -65,11 +65,9 @@ public class Evento {
         }
     }
 
+    //metodo per disdire posti ad un evento
     public void disdici(){
-        if (data.isBefore(LocalDate.now())) {
-            System.out.println("L'evento è già passato.");
-        }
-        else if (postiPrenotati <= 0) {
+        if (postiPrenotati <= 0) {
             System.out.println("Non ci sono prenotazioni per questo evento.");
         }
         else{
@@ -84,6 +82,6 @@ public class Evento {
 
     @Override
     public String toString(){
-        return "Data evento: " + dataFormattata() + " - Evento: " + titolo;
+        return "Evento: " + titolo + " - Data evento: " + dataFormattata();
     }
 }

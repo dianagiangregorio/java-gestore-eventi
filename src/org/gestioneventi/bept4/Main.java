@@ -2,6 +2,7 @@ package org.gestioneventi.bept4;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +19,7 @@ public class Main {
             titolo = input.nextLine();
         }
 
-        // chiedo all'utente di inserire la data, lo scanner restituirà una variabile di tipo Stringa
+        // chiedo all'utente di inserire la data
         // utilizzo un ciclo while per permettere all'utente di riprovare ad inserire la data finchè non è corretta
         // controllo che il formato della data inserito sia corretto e lo inserisco nella variabile LocalDate data
         LocalDate data = null;
@@ -30,14 +31,24 @@ public class Main {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 // il metodo parse converte la stringa in LocalDate se il formato è corretto
                 data = LocalDate.parse(dataString, formatter);
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 System.out.println("Il formato della data non è valido. Inserisci una data corretta:");
             }
         }
 
         // chiedo all'utente di inserire il numero di posti totali dell'evento
-        System.out.println("Inserisci il numero di posti totali: ");
-        int postiTotali = Integer.parseInt(input.nextLine());
+        int postiTotali = -1;
+        while (postiTotali <= 0) {
+            System.out.println("Inserisci il numero di posti totali: ");
+
+            try {
+                postiTotali = Integer.parseInt(input.nextLine());
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Hai inserito un valore non valido. Inserisci un valore corretto.");
+            }
+
+        }
 
         // creo l'evento
         Evento evento = null;
@@ -140,8 +151,8 @@ public class Main {
 
                         // controllo che ci siano posti da disdire per l'evento
                         if (disdettePrenotazioni > evento.getPostiPrenotati()) {
-                            System.out.println("Non ci sono prenotazioni da disdire.");
-                            break;
+                            System.out.println("Il numero inserito è maggiore dei posti prenotati");
+                            continue;
                         }
 
                         // se tutto è corretto effettuo la disdetta delle prenotazioni
